@@ -1,112 +1,265 @@
 /**
  * 依赖包的定义。
- * 
- * 这种定义方式的优点是在顶级项目目录下引入，在子项目中也可以直接用了。
  *
+ * 这种定义方式的优点是在顶级项目目录下引入，在子项目中也可以直接用了。
  */
 
 // 一些会重复出现的jar包的版本号
-// 
 ext.versions = [
-    spring: '3.2.5.RELEASE',
-    security: '3.1.4.RELEASE',
-    jackson: '1.9.13',
-    logback: '1.0.13',
-    slf4j: '1.7.5',
-    httpclient: '4.3.1',
+
+    'spring': '4.1.0.RELEASE',
+    'spring-data': '1.7.0.RELEASE',
+    'spring-ws': '2.2.0.RELEASE',
+    'spring-integration': '4.0.4.RELEASE',
+    //'spring-security': '3.2.4.RELEASE',
+
+    'hibernate': '4.3.6.Final',
+    'hibernate-search': '4.5.1.Final',
+    'hibernate-validator': '5.1.2.Final',
+    'hibernate-ogm': '4.1.0.Beta6',
+
+    'shiro': '1.2.3',
+
+    'jackson': '1.9.13',
+    'logback': '1.1.2',
+    'slf4j': '1.7.7',
+    'httpclient': '4.3.4',
+    'guava': '14.0.1',
+    'junit': '4.11'
 ]
 
 // 各种可能会用到的jar包
-// 
 ext.libraries = [
-		"servlet-api": "javax.servlet:servlet-api:2.5",
-		"jsp-api": "javax.servlet:jsp-api:2.0",
+    "servlet-api": "javax.servlet:javax.servlet-api:3.1.0",
+    "jsp-api": "javax.servlet:jsp-api:2.0",
+    "jstl": "javax.servlet:jstl:1.2",
 
-        "ebean": "org.avaje.ebeanorm:avaje-ebeanorm:3.2.4",
-        "persistence-api": "javax.persistence:persistence-api:1.0",
+    "avaje-ebeanorm": "org.avaje.ebeanorm:avaje-ebeanorm:4.1.0",
+    // "persistence-api": "javax.persistence:persistence-api:1.0.2",
 
-        "aspectjweaver": "org.aspectj:aspectjweaver:1.7.4",
+    "aspectjweaver": "org.aspectj:aspectjweaver:1.8.1",
 
-        // spring 3.1.2 
-        // 
-        "spring-core": "org.springframework:spring-core:${versions.spring}",
-        "spring-beans": "org.springframework:spring-beans:${versions.spring}",
-        "spring-jdbc": "org.springframework:spring-jdbc:${versions.spring}",
-        "spring-tx": "org.springframework:spring-tx:${versions.spring}",
-        "spring-context": "org.springframework:spring-context:${versions.spring}",
+    // spring 4.0.5.RELEASE
+    "spring-core": "org.springframework:spring-core:${versions.'spring'}",
+    "spring-beans": "org.springframework:spring-beans:${versions.'spring'}",
+    "spring-tx": "org.springframework:spring-tx:${versions.'spring'}",
+    "spring-context": "org.springframework:spring-context:${versions.'spring'}",
+    "spring-context-support": "org.springframework:spring-context-support:${versions.'spring'}",
 
-        "spring-orm": "org.springframework:spring-orm:${versions.spring}",
-        "spring-oxm": "org.springframework:spring-oxm:${versions.spring}",
-        "spring-webmvc": "org.springframework:spring-webmvc:${versions.spring}",
-        "spring-jms": "org.springframework:spring-jms:${versions.spring}",
-        "spring-aspects": "org.springframework:spring-aspects:${versions.spring}",
-        "spring-test": "org.springframework:spring-test:${versions.spring}",
+    "spring-aop": "org.springframework:spring-aop:${versions.'spring'}",
+    "spring-aspects": "org.springframework:spring-aspects:${versions.'spring'}",
+    "spring-jdbc": "org.springframework:spring-jdbc:${versions.'spring'}",
+    "spring-orm": "org.springframework:spring-orm:${versions.'spring'}",
+    "spring-oxm": "org.springframework:spring-oxm:${versions.'spring'}",
 
-        // Spring Security 
-        // 
-        "spring-security-core": "org.springframework.security:spring-security-core:${versions.security}",
-        "spring-security-web": "org.springframework.security:spring-security-web:${versions.security}",
-        "spring-security-config": "org.springframework.security:spring-security-config:${versions.security}",
-        // "spring-security-taglibs": "org.springframework.security:spring-security-taglibs:${versions.security}",
+    "spring-web": "org.springframework:spring-web:${versions.'spring'}",
+    "spring-webmvc": "org.springframework:spring-webmvc:${versions.'spring'}",
 
+    "spring-jms": "org.springframework:spring-jms:${versions.'spring'}",
 
-        // 忽略common log，使用slf4j代替 
-        // 
-        "logback-classic": "ch.qos.logback:logback-classic:${versions.logback}",
-        "logback-core": "ch.qos.logback:logback-core:${versions.logback}",
-        "jcl-over-slf4j": "org.slf4j:jcl-over-slf4j:${versions.slf4j}",
-        "log4j-over-slf4j": "org.slf4j:log4j-over-slf4j:${versions.slf4j}",
-        "slf4j-api": "org.slf4j:slf4j-api:${versions.slf4j}",
+    "spring-test": "org.springframework:spring-test:${versions.'spring'}",
 
-        // JSON 
-        // 
-        "jackson-core-asl": "org.codehaus.jackson:jackson-core-asl:${versions.jackson}",
-        "jackson-mapper-asl": "org.codehaus.jackson:jackson-mapper-asl:${versions.jackson}",
+    // spring-ws 2.2.0.RELEASE
+    "spring-ws": "org.springframework.ws:spring-ws:${versions.'spring-ws'}",
 
+    // spring-data 1.6.0.RELEASE
+    "spring-data-jpa": "org.springframework.data:spring-data-jpa:${versions.'spring-data'}",
 
-        // Apache 
-        // 
-        "commons-dbcp": "commons-dbcp:commons-dbcp:1.4",
-        "commons-beanutils-core": "commons-beanutils:commons-beanutils-core:1.8.3",
-        "commons-configuration": "commons-configuration:commons-configuration:1.10",
-        "commons-lang3": "org.apache.commons:commons-lang3:3.1",
-        "commons-lang": "commons-lang:commons-lang:2.6",
-        "commons-digester3": "org.apache.commons:commons-digester3:3.2",
+    // spring-integration 4.0.2.RELEASE
+    "spring-integration-core": "org.springframework.integration:spring-integration-core:${versions.'spring-integration'}",
+    "spring-integration-scripting": "org.springframework.integration:spring-integration-scripting:${versions.'spring-integration'}",
+    "spring-integration-jms": "org.springframework.integration:spring-integration-jms:${versions.'spring-integration'}",
+    "spring-integration-stream": "org.springframework.integration:spring-integration-stream:${versions.'spring-integration'}",
+    "spring-integration-file": "org.springframework.integration:spring-integration-file:${versions.'spring-integration'}",
+    "spring-integration-jpa": "org.springframework.integration:spring-integration-jpa:${versions.'spring-integration'}",
+    "spring-integration-ftp": "org.springframework.integration:spring-integration-ftp:${versions.'spring-integration'}",
+    "spring-integration-jdbc": "org.springframework.integration:spring-integration-jdbc:2.2.5.RELEASE",
+    "spring-integration-ws": "org.springframework.integration:spring-integration-ws:${versions.'spring-integration'}",
+    "spring-integration-mail": "org.springframework.integration:spring-integration-mail:${versions.'spring-integration'}",
+    "spring-integration-xml": "org.springframework.integration:spring-integration-xml:${versions.'spring-integration'}",
 
-        "commons-fileupload": "commons-fileupload:commons-fileupload:1.3",
-        // "commons-io": "org.apache.commons:commons-io:1.3.2",
+    // Spring Security
+    //"spring-security": "org.springframework.security:spring-security:${versions.'spring-security'}",
+    //"spring-security-core": "org.springframework.security:spring-security-core:${versions.'spring-security'}",
+    //"spring-security-web": "org.springframework.security:spring-security-web:${versions.'spring-security'}",
+    //"spring-security-config": "org.springframework.security:spring-security-config:${versions.'spring-security'}",
+    //"spring-security-taglibs": "org.springframework.security:spring-security-taglibs:${versions.'spring-security'}",
 
-        "velocity": "org.apache.velocity:velocity:1.7",
+    // hibernate 4.3.5.Final
+    "hibernate-core": "org.hibernate:hibernate-core:${versions.'hibernate'}",
+    "hibernate-entitymanager": "org.hibernate:hibernate-entitymanager:${versions.'hibernate'}",
+    "hibernate-ehcache": "org.hibernate:hibernate-ehcache:${versions.'hibernate'}",
 
-        "httpclient": "org.apache.httpcomponents:httpclient:${versions.httpclient}",
-        "httpmime": "org.apache.httpcomponents:httpmime:${versions.httpclient}",
+    "hibernate-c3p0": "org.hibernate:hibernate-c3p0:${versions.'hibernate'}",
+    "mysql-connector-java": "mysql:mysql-connector-java:5.1.31",
 
-        "ant": "org.apache.ant:ant:1.9.2",
-        // "poi": "org.apache.poi:poi:3.9",
-        // "xbean-spring": "org.apache.xbean:xbean-spring:3.9",
+    // hibernate-search 4.5.1.Final
+    "hibernate-search": "org.hibernate:hibernate-search:${versions.'hibernate-search'}",
+    "hibernate-search-engine": "org.hibernate:hibernate-search-engine:${versions.'hibernate-search'}",
 
-        // ActiveMQ 
-        // 
-        // "activemq-all": "org.apache.activemq:activemq-all:5.2.0",
+    // hibernate-validator 5.1.1.Final
+    "hibernate-validator": "org.hibernate:hibernate-validator:${versions.'hibernate-validator'}",
 
+    "hibernate-ogm-core": "org.hibernate.ogm:hibernate-ogm-core:${versions.'hibernate-ogm'}",
+    "hibernate-ogm-ehcache": "org.hibernate.ogm:hibernate-ogm-ehcache:${versions.'hibernate-ogm'}",
+    "hibernate-ogm-mongodb": "org.hibernate.ogm:hibernate-ogm-mongodb:${versions.'hibernate-ogm'}",
+    "hibernate-ogm-couchdb": "org.hibernate.ogm:hibernate-ogm-couchdb:${versions.'hibernate-ogm'}",
+    "hibernate-ogm-infinispan": "org.hibernate.ogm:hibernate-ogm-infinispan:${versions.'hibernate-ogm'}",
+    // 图形数据库Neo4j
+    "hibernate-ogm-neo4j": "org.hibernate.ogm:hibernate-ogm-neo4j:4.1.0.Beta4",
 
-        // Cache 
-        // 
-        "ehcache-core": "net.sf.ehcache:ehcache-core:2.6.6",
+    "hibernate-jpa-2.1-api": "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final",
 
-        // Mail 
-        // 
-        "mail": "javax.mail:mail:1.4",
+    "mybatis": "org.mybatis:mybatis:3.2.7",
+    "mybatis-spring": "org.mybatis:mybatis-spring:1.2.2",
 
+    "quartz": "org.quartz-scheduler:quartz:2.2.1",
 
-        // Other 
-        // 
-        // "guava": "com.google.guava:guava:12.0",
-        "htmlparser": "org.htmlparser:htmlparser:2.1",
-        // "mvel2": "org.mvel:mvel2:2.0.9",
-        "joda-time": "joda-time:joda-time:2.3",
-        "xstream": "com.thoughtworks.xstream:xstream:1.4.5",
+    // apache shiro
+    "shiro-all": "org.apache.shiro:shiro-all:${versions.'shiro'}",
+    "shiro-core": "org.apache.shiro:shiro-core:${versions.'shiro'}",
+    "shiro-web": "org.apache.shiro:shiro-web:${versions.'shiro'}",
+    "shiro-ehcache": "org.apache.shiro:shiro-ehcache:${versions.'shiro'}",
+    "shiro-spring": "org.apache.shiro:shiro-spring:${versions.'shiro'}",
+    "shiro-cas": "org.apache.shiro:shiro-cas:${versions.'shiro'}",
 
-        "junit": "junit:junit:4.11",
- 
+    // 页面传输压缩
+    "pjl-comp-filter": "net.sourceforge.pjl-comp-filter:pjl-comp-filter:1.7",
+
+    // NOSQL
+    "jedis": "redis.clients:jedis:2.5.1",
+
+    // memcached
+    "spymemcached": "net.spy:spymemcached:2.11.3",
+
+    // ehcache
+    "ehcache-core": "net.sf.ehcache:ehcache-core:2.6.9",
+    "ehcache-web": "net.sf.ehcache:ehcache-web:2.0.4",
+
+    // jolokia Restful JMX
+    "jolokia-core": "org.jolokia:jolokia-core:1.2.2",
+
+    "hystrix-core": "com.netflix.hystrix:hystrix-core:1.4.0-RC4",
+
+    // 忽略common log，使用slf4j代替
+    "logback-classic": "ch.qos.logback:logback-classic:${versions.'logback'}",
+    "logback-core": "ch.qos.logback:logback-core:${versions.'logback'}",
+    // 代码直接调用commons-logging会被桥接到slf4j
+    "jcl-over-slf4j": "org.slf4j:jcl-over-slf4j:${versions.'slf4j'}",
+    // 代码直接调用log4j会被桥接到slf4j
+    "log4j-over-slf4j": "org.slf4j:log4j-over-slf4j:${versions.'slf4j'}",
+    "jul-to-slf4j": "org.slf4j:jul-to-slf4j:${versions.'slf4j'}",
+    // 代码直接调用java.util.logging会被桥接到slf4j
+    "slf4j-api": "org.slf4j:slf4j-api:${versions.'slf4j'}",
+    "logback-ext-spring": "org.logback-extensions:logback-ext-spring:0.1.2",
+
+    "log4jdbc": "com.googlecode.log4jdbc:log4jdbc:1.2",
+
+    // zxing 二维码
+    "zxing-core": "com.google.zxing:core:3.1.0",
+    "zxing-javase": "com.google.zxing:javase:3.1.0",
+
+    // barbecue条形码
+    "barbecue": "net.sourceforge.barbecue:barbecue:1.5-beta1",
+
+    // jasperreports 5.6.0
+    "jasperreports": "net.sf.jasperreports:jasperreports:5.5.0",
+    "olap4j": "org.olap4j:olap4j:1.1.0",
+
+    "groovy-all": "org.codehaus.groovy:groovy-all:2.3.3",
+
+    // PDF itext
+    "itext": "com.lowagie:itext:2.1.7",
+    "itext-rtf": "com.lowagie:itext-rtf:2.1.7",
+    // Excel apache poi
+    "poi": "org.apache.poi:poi:3.10-FINAL",
+
+    // JSON
+    "jackson-core-asl": "org.codehaus.jackson:jackson-core-asl:${versions.'jackson'}",
+    "jackson-mapper-asl": "org.codehaus.jackson:jackson-mapper-asl:${versions.'jackson'}",
+
+    "jackson-core": "com.fasterxml.jackson.core:jackson-core:2.4.1",
+    "jackson-databind": "com.fasterxml.jackson.core:jackson-databind:2.4.1.1",
+    "jackson-annotations": "com.fasterxml.jackson.core:jackson-annotations:2.4.1",
+    "jackson-module-jaxb-annotations": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.4.1",
+
+    // Apache
+    "commons-dbcp": "commons-dbcp:commons-dbcp:1.4",
+    "commons-dbcp2": "org.apache.commons:commons-dbcp2:2.0.1",
+    "commons-beanutils": "commons-beanutils:commons-beanutils:1.9.2",
+    "commons-beanutils-core": "commons-beanutils:commons-beanutils-core:1.8.3",
+    "commons-configuration": "commons-configuration:commons-configuration:1.10",
+    "commons-lang3": "org.apache.commons:commons-lang3:3.3.2",
+    "commons-lang": "commons-lang:commons-lang:2.6",
+    "commons-digester3": "org.apache.commons:commons-digester3:3.2",
+    "commons-fileupload": "commons-fileupload:commons-fileupload:1.3.1",
+    "commons-io": "org.apache.commons:commons-io:1.3.2",
+    "commons-codec": "commons-codec:commons-codec:1.9",
+    "commons-net": "commons-net:commons-net:3.3",
+
+    "velocity": "org.apache.velocity:velocity:1.7",
+    "freemarker": "org.freemarker:freemarker:2.3.20",
+
+    // 面向Java的XML/HTML模板引擎
+    "thymeleaf": "org.thymeleaf:thymeleaf:2.1.3.RELEASE",
+    "thymeleaf-spring4": "org.thymeleaf:thymeleaf-spring4:2.1.3.RELEASE",
+    //"thymeleaf-spring3": "org.thymeleaf:thymeleaf-spring3:2.1.3.RELEASE",
+    "thymeleaf-testing": "org.thymeleaf:thymeleaf-testing:2.1.3.RELEASE",
+
+    "sitemesh": "org.sitemesh:sitemesh:3.0.0",
+    "urlrewritefilter": "org.tuckey:urlrewritefilter:4.0.4",
+
+    "cglib": "cglib:cglib:3.1",
+    "javassist": "org.javassist:javassist:3.18.2-GA",
+
+    "httpclient": "org.apache.httpcomponents:httpclient:${versions.'httpclient'}",
+    "httpmime": "org.apache.httpcomponents:httpmime:${versions.'httpclient'}",
+
+    "commons-pool": "commons-pool:commons-pool:1.6",
+    "commons-pool2": "org.apache.commons:commons-pool2:2.2",
+
+    "ant": "org.apache.ant:ant:1.9.4",
+
+    // XBean简化spring配置文件
+    "xbean-spring": "org.apache.xbean:xbean-spring:3.9",
+
+    // 类BeanUtils DozerBeanMapper mapper=new DozerBeanMapper();book2=(Book)mapper.map(book1,com.denny_blue.dozerdemo.Book.class);
+    "dozer": "net.sf.dozer:dozer:5.5.1",
+
+    // ActiveMQ
+    "activemq-all": "org.apache.activemq:activemq-all:5.10.0",
+
+    "netty-all": "io.netty:netty-all:5.0.0.Alpha1",
+
+    "grizzly-core": "org.glassfish.grizzly:grizzly-core:2.3.14",
+    //"grizzly-http-all": "org.glassfish.grizzly:grizzly-http-all:2.3.14",
+    //"grizzly-connection-pool": "org.glassfish.grizzly:connection-pool:2.3.14",
+
+    // Mail
+    "mail": "javax.mail:mail:1.4.7",
+
+    "activation": "javax.activation:activation:1.1.1",
+
+    // monitor
+    "javasimon-core": "org.javasimon:javasimon-core:3.5.1",
+    "javasimon-spring": "org.javasimon:javasimon-spring:3.5.1",
+    "javasimon-jdbc4": "org.javasimon:javasimon-jdbc4:3.5.1",
+    "javasimon-console-embed": "org.javasimon:javasimon-console-embed:3.5.1",
+
+    // Other
+    "guava": "com.google.guava:guava:${versions.'guava'}",
+    "htmlparser": "org.htmlparser:htmlparser:2.1",
+    "mvel2": "org.mvel:mvel2:2.1.9.Final",
+    "joda-time": "joda-time:joda-time:2.3",
+    "joda-time-jsptags": "joda-time:joda-time-jsptags:1.1.1",
+    "xstream": "com.thoughtworks.xstream:xstream:1.4.7",
+
+    "im4java": "org.im4java:im4java:1.4.0",
+    "bcprov-jdk15on": "org.bouncycastle:bcprov-jdk15on:1.50",
+    "jsoup": "org.jsoup:jsoup:1.7.3",
+
+    "aliyun-openservices": "com.aliyun.openservices:aliyun-openservices:1.2.3",
+
+    "junit": "junit:junit:${versions.'junit'}",
+    "hamcrest-core": "org.hamcrest:hamcrest-core:1.3"
 ]
