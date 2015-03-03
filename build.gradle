@@ -11,7 +11,6 @@ apply plugin: 'versions'
 apply from: 'dependencyDefinitions.gradle'
 
 // ======================================================================================
-//
 // 用于生成项目目录结构
 // https://github.com/townsfolk/gradle-templates
 // 远程速度太慢，所以下载到本地编译，位于 gradle/gradle-templates 下面
@@ -21,7 +20,6 @@ apply from: 'dependencyDefinitions.gradle'
 // 
 // 不过这个好像需要采用绝对路径才行，相对路径不好使，搞了半天没搞定，
 // 索性把这段代码直接复制过来，反正就是去配置下jar就行了
-// 
 buildscript {
     repositories {
         ivy {
@@ -39,7 +37,6 @@ buildscript {
         def templatesVersion = project.hasProperty('gradle.templates.ver') ? project.getProperty('gradle.templates.ver') :
                                                                          project.version
         classpath "gradle-templates:gradle-templates:${templatesVersion}"
-
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.4'
     }
 }
@@ -84,7 +81,38 @@ subprojects {
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
     
     repositories {
+        // mavenCentral()别名，表示依赖是从Central Maven 2 仓库中获取。
+        // jcenter()别名，表示依赖是从Bintary’s JCenter Maven 仓库中获取。
+        // mavenLocal()别名，表示依赖是从本地的Maven仓库中获取。
         mavenCentral()
+        maven { url 'http://download.java.net/maven/2/' }
+        maven { url 'http://10.33.1.216:8081/nexus/content/groups/public/' }
+
+        // 带认证的库
+        /*
+        maven{
+            credentials{
+                username 'admin'
+                password 'admin123'
+            }
+            url "http://localhost:8081/nexus/content/groups/public/"
+        }
+        */
+
+        // ivy {
+        //     url "http://ivy.petrikainulainen.net/repo"
+        // }
+
+        // ivy {
+        //     // URL can refer to a local directory
+        //     url "../local-repo"
+        // }
+
+        // flatDir {
+        //    dirs 'libs'
+        // }
+
+        flatDir(dirs: '$projectDir/libs')
     }
 
     /*
@@ -114,7 +142,17 @@ subprojects {
         all*.exclude group: 'commons-beanutils', module: 'commons-beanutils'
     }
     
+    // List hibernate = ['org.hibernate:hibernate:3.0.5@jar', 'somegroup:someorg:1.0@jar']
+    
     dependencies {
+        /*
+        compile("org.gradle.test.excludes:api:1.0") {
+            exclude module: 'shared'
+        }
+        */
+        
+        // runtime hibernate
+    
         // 通用依赖
         compile (
             /*
@@ -123,9 +161,15 @@ subprojects {
             "org.springframework:spring-tx:$springVersion",
             "org.hibernate:hibernate-entitymanager:$hibernateVersion", 
             */
+            
+            libraries.'logback-core',
             libraries.'logback-classic',
             libraries.'jcl-over-slf4j',
-            libraries.'log4j-over-slf4j'
+            libraries.'log4j-over-slf4j',
+            libraries.'jul-to-slf4j',
+            libraries.'slf4j-api',
+            libraries.'logback-ext-spring',
+            libraries.'guava'
         )
 
         // 依赖mave中不存在的jar
@@ -133,9 +177,7 @@ subprojects {
         ext.rootProjectLibs = new File(rootProject.rootDir, 'libs').getAbsolutePath()
         ext.jarTree += fileTree(dir: rootProjectLibs, include: '**/*.jar')
 
-        // 
         // 测试依赖
-        // 
         testCompile (
             libraries.'junit',
             libraries.'spring-test'
@@ -144,6 +186,64 @@ subprojects {
 
     // 显示当前项目下所有用于 compile 的 jar.
     task listJars(description: 'Display all compile jars.') << {
+        println description
         configurations.compile.each { File file -> println file.name }
     }
 }
+
+/*
+configure(subprojects.findAll {it.name.contains('war')}) {
+    apply plugin: 'war'
+}
+
+project(':core') {
+    ext{
+        hibernateVersion = '4.2.1.Final'
+    }
+    dependencies {
+        compile 'org.hibernate:hibernate-core:${hibernateVersion}'
+    }
+}
+
+def defaultProperty(propertyName, defaultValue) {
+    return hasProperty(propertyName) ? project[propertyName] : defaultValue
+}
+
+ext {
+    profile = project['profile']
+}
+def loadProperties(){
+    def props = new Properties()
+    new File("${rootProject.projectDir}/config/${profile}.properties")
+            .withInputStream {
+        stream -> props.load(stream)
+    }
+    props
+}
+
+environments {
+    development {
+        jdbc {
+            url = 'development'
+            user = 'xxxx'
+            password = 'xxxx'
+        }
+    }
+
+    test {
+        jdbc {
+            url = 'test'
+            user = 'xxxx'
+            password = 'xxxx'
+        }
+    }
+
+    production {
+        jdbc {
+            url = 'production'
+            user = 'xxxx'
+            password = 'xxxx'
+        }
+    }
+}
+*/
